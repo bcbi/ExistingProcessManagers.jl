@@ -2,5 +2,5 @@ using ExistingProcessManagers
 using Test
 
 @testset "ExistingProcessManagers.jl" begin
-    # Write your tests here.
+    @test ExistingProcessManagers._foobar(1) == 2
 end
