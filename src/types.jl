@@ -1,11 +1,13 @@
 import Distributed
-import DocStringExtensions
 
 """
-$(DocStringExtensions.TYPEDEF)
+## Summary
 
-Fields:
-$(DocStringExtensions.TYPEDFIELDS)
+struct ExistingProcessManager <: Distributed.ClusterManager
+
+## Fields
+
+- wconfigs :: Vector{Distributed.WorkerConfig}
 
 ---
 

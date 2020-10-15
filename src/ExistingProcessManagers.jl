@@ -1,7 +1,6 @@
 module ExistingProcessManagers
 
 import Distributed
-import DocStringExtensions
 
 export ExistingProcessManager
 export addprocs_existing
