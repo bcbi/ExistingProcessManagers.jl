@@ -1,9 +1,9 @@
 import Distributed
 
 """
-    addprocs_existing(workers; kwargs...)
+    addprocs_existing(x; kwargs...)
 
-Equivalent to `addprocs(ExistingProcessManager(workers); kwargs...)`.
+Equivalent to `addprocs(ExistingProcessManager(x); kwargs...)`.
 
 ## Examples
 
@@ -65,6 +65,6 @@ julia> worker_output = \"""
 julia> addprocs_existing(worker_output; kwargs...)
 ```
 """
-@inline function addprocs_existing(workers; kwargs...)
-    return Distributed.addprocs(ExistingProcessManager(workers); kwargs...)
+@inline function addprocs_existing(x; kwargs...)
+    return Distributed.addprocs(ExistingProcessManager(x); kwargs...)
 end
