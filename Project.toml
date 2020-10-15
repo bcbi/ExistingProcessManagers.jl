@@ -1,7 +1,7 @@
 name = "ExistingProcessManagers"
 uuid = "3185f642-0f69-4c32-aed6-948184b6e42b"
 authors = ["Dilum Aluthge"]
-version = "0.1.0"
+version = "0.1.0-DEV"
 
 [compat]
 julia = "1.5"
