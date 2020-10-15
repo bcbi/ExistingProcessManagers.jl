@@ -65,7 +65,7 @@ julia> addprocs(manager)
 end
 
 """
-ExistingProcessManager(worker_output::AbstractString)
+    ExistingProcessManager(worker_output::AbstractString)
 
 Construct an `ExistingProcessManager` from the output printed by Julia worker
 processes.
