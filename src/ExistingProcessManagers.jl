@@ -17,4 +17,4 @@ include("launch.jl")
 include("manage.jl")
 include("parse_julia_worker_output.jl")
 
-end
+end # end module ExistingProcessManagers

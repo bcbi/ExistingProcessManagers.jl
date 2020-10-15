@@ -5,21 +5,27 @@ import Distributed
 
 Convert a list of hosts and port numbers to a list of `WorkerConfig`s.
 
-## Examples
+## Example
 
-```julia
+```jldoctest; setup = :(using ExistingProcessManagers; using Distributed)
 julia> hosts_and_ports = [
        ("127.0.0.1", 9601), # the host is "127.0.0.1", and the port number is 9601
        ("127.0.0.1", 9602), # the host is "127.0.0.1", and the port number is 9602
-       ]
-2-element Vector{Tuple{String, Int64}}:
- ("127.0.0.1", 9601)
- ("127.0.0.1", 9602)
+       ];
 
-julia> hosts_and_ports_to_workerconfigs(hosts_and_ports)
-2-element Vector{Distributed.WorkerConfig}:
- Distributed.WorkerConfig(nothing, "127.0.0.1", 9601, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing)
- Distributed.WorkerConfig(nothing, "127.0.0.1", 9602, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing)
+julia> wconfigs = hosts_and_ports_to_workerconfigs(hosts_and_ports);
+```
+
+Now you can do either of the following two options, which are equivalent:
+
+Option 1:
+```julia
+julia> addprocs(ExistingProcessManager(wconfigs))
+```
+
+Option 2:
+```julia
+julia> addprocs_existing(wconfigs)
 ```
 """
 @inline function hosts_and_ports_to_workerconfigs(hosts_and_ports::Vector{Tuple{String, Int}})
@@ -44,18 +50,17 @@ Construct an `ExistingProcessManager` from a list of hosts and port numbers.
 
 ## Example
 
-```julia
+```jldoctest; setup = :(using ExistingProcessManagers; using Distributed)
 julia> hosts_and_ports = [
        ("127.0.0.1", 9601), # the host is "127.0.0.1", and the port number is 9601
        ("127.0.0.1", 9602), # the host is "127.0.0.1", and the port number is 9602
-       ]
-2-element Vector{Tuple{String, Int64}}:
- ("127.0.0.1", 9601)
- ("127.0.0.1", 9602)
+       ];
 
-julia> manager = ExistingProcessManager(hosts_and_ports)
-ExistingProcessManager(WorkerConfig[WorkerConfig(nothing, "127.0.0.1", 9601, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing), WorkerConfig(nothing, "127.0.0.1", 9602, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing)])
+julia> manager = ExistingProcessManager(hosts_and_ports);
+```
 
+Now you can do:
+```julia
 julia> addprocs(manager)
 ```
 """
@@ -72,19 +77,20 @@ processes.
 
 ## Example
 
-```julia
+```jldoctest; setup = :(using ExistingProcessManagers; using Distributed)
 julia> worker_output = \"""
        julia_worker:9960#192.168.1.151
        julia_worker:9960#192.168.1.151
        julia_worker:9960#192.168.1.151
        julia_worker:9966#192.168.1.157
        julia_worker:9968#192.168.1.159
-       \"""
-"julia_worker:9960#192.168.1.151\njulia_worker:9960#192.168.1.151\njulia_worker:9960#192.168.1.151\njulia_worker:9966#192.168.1.157\njulia_worker:9968#192.168.1.159\n"
+       \""";
 
-julia> manager = ExistingProcessManager(worker_output)
-ExistingProcessManager(WorkerConfig[WorkerConfig(nothing, "192.168.1.151", 9960, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing), WorkerConfig(nothing, "192.168.1.157", 9966, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing), WorkerConfig(nothing, "192.168.1.159", 9968, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing)])
+julia> manager = ExistingProcessManager(worker_output);
+```
 
+Now you can do:
+```julia
 julia> addprocs(manager)
 ```
 """
