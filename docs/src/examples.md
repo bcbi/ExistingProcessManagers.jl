@@ -40,7 +40,7 @@ julia> hosts_and_ports = [
        ("192.168.1.157", 9688),
        ]
 
-julia> addprocs(ExistingProcessManager(hosts_and_ports))
+julia> Distributed.addprocs(ExistingProcessManagers.ExistingProcessManager(hosts_and_ports))
 ```
 
 ## Example 2
@@ -79,5 +79,5 @@ julia> worker_output = """
        julia_worker:9688#192.168.1.157
        """
 
-julia> addprocs(ExistingProcessManager(worker_output))
+julia> Distributed.addprocs(ExistingProcessManagers.ExistingProcessManager(worker_output))
 ```
