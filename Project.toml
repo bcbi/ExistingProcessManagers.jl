@@ -1,7 +1,7 @@
 name = "ExistingProcessManagers"
 uuid = "3185f642-0f69-4c32-aed6-948184b6e42b"
 authors = ["Dilum Aluthge"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
